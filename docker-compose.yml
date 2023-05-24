@@ -1,9 +1,9 @@
-version: 3,
+version: "3.9"
 
 services: 
-  database_internal_notes: 
+  database: 
     image: postgres
-    container_name: database_internal_notes
+    container_name: database
     restart: always
     ports:
       - 5432:5432
@@ -13,18 +13,22 @@ services:
       - POSTGRES_DB=internal-notes
     volumes:
       - pgdata:/data/postgres
+
   app:
     build: .
     container_name: internal-notes
+    restart: always
     ports: 
       - 3333:3333
     volumes:
       - .:/usr/app
     links:
-      - database_internal_notes
+      - database
     depends_on:
-      - database_internal_notes
+      - database
 
 volumes:
   pgdata: 
     driver: local
+
+    
