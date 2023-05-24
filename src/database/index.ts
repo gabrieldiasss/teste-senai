@@ -6,5 +6,7 @@ const dataSource = new DataSource({
     host: "localhost",
     username: "docker",
     password: "senai",
-    database: "internal-notes"
+    database: "internal-notes",
 })
+
+dataSource.initialize()
