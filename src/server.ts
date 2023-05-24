@@ -1,6 +1,11 @@
+import "reflect-metadata"
 import express from 'express'
 
 const app = express()
+
+import { createConnection } from './database'
+
+createConnection()
 
 app.get("/", (request, response) => {
     console.log("oi")
