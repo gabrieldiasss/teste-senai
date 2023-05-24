@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { UsersRepository } from '../repositories/UsersRepository'
+import { CreateUserService } from '../services/CreateUserService'
 
 const usersRoutes = Router()
 const usersRepository = new UsersRepository()
@@ -7,13 +8,9 @@ const usersRepository = new UsersRepository()
 usersRoutes.post("/", (request, response) => {
     const { name } = request.body
 
-    const userAlreadyExists = usersRepository.findByName(name)
+    const createUserService = new CreateUserService(usersRepository)
 
-    if(userAlreadyExists) {
-        return response.status(400).json({ error: "User already exists!" })
-    }
-
-    usersRepository.create({ name })
+    createUserService.execute(name)
 
     return response.status(201).send()
 })

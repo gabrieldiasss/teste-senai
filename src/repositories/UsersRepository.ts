@@ -1,8 +1,5 @@
 import { User } from "../model/User";
-
-interface ICreateUserDto {
-  name: string  
-}
+import { ICreateUserDto } from "./IUsersRepository";
 
 class UsersRepository {
   private users: User[] = [];
@@ -24,12 +21,12 @@ class UsersRepository {
   }
 
   findByName(name: string): User {
-    const user = this.users.find((user) => user.name === name)
-    return user
+    const user = this.users.find((user) => user.name === name);
+    return user;
   }
 
   list() {
-    return this.users
+    return this.users;
   }
 }
 
