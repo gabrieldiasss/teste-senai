@@ -1,17 +1,27 @@
 import { Router } from 'express'
+import { UsersRepository } from '../repositories/UsersRepository'
 
 const usersRoutes = Router()
+const usersRepository = new UsersRepository()
 
-const users = []
-
-usersRoutes.post("/users", (request, response) => {
+usersRoutes.post("/", (request, response) => {
     const { name } = request.body
 
-    users.push({
-        name
-    })
+    const userAlreadyExists = usersRepository.findByName(name)
 
-    return response.status(201)
+    if(userAlreadyExists) {
+        return response.status(400).json({ error: "User already exists!" })
+    }
+
+    usersRepository.create({ name })
+
+    return response.status(201).send()
+})
+
+usersRoutes.get("/", (request, response) => {
+    const all = usersRepository.list()
+
+    return response.json(all)
 })
 
 export { usersRoutes }
