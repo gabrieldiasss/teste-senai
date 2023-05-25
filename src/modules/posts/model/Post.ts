@@ -5,6 +5,8 @@ class Post {
     title: string
     description: string
     content: string
+    author: string
+    created_at: Date
 
     constructor() {
         if(!this.id) {
