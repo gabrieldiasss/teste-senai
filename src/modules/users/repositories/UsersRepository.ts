@@ -1,42 +1,31 @@
-import { User } from "../model/User";
+import { DataSource, Repository } from "typeorm";
+import { User } from "../entities/User";
 import { ICreateUserDto, IUsersRepository } from "./IUsersRepository";
+import AppDataSource from "../../../database/data-source";
 
 class UsersRepository implements IUsersRepository {
-  private users: User[] = [];
+  private users: Repository<User>;
 
-  private static INSTANCE: UsersRepository
-
-  private constructor() {
-    this.users = [];
+  constructor() {
+    this.users = AppDataSource.getRepository(User);
   }
 
-  public static getInstance(): UsersRepository {
-    if(!UsersRepository.INSTANCE) {
-      UsersRepository.INSTANCE = new UsersRepository()
-    }
-
-    return UsersRepository.INSTANCE
-  }
-
-  create({ name }: ICreateUserDto): void {
-    const user: User = new User();
-
-    Object.assign(user, {
+  async create({ name, username }: ICreateUserDto): Promise<void> {
+    const user = this.users.create({
       name,
-      created_at: new Date(),
-      quantityPost: 0,
+      username,
     });
 
-    this.users.push(user);
+    await this.users.save(user);
+
+    console.log(user);
   }
 
-  findByName(name: string): User {
-    const user = this.users.find((user) => user.name === name);
-    return user;
-  }
-
-  list() {
-    return this.users;
+  async list(id: string) {
+    const user = await this.users.findOneBy({
+      id
+    });
+    return user
   }
 }
 

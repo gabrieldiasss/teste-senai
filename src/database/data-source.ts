@@ -9,6 +9,7 @@ const AppDataSource = new DataSource({
   password: "senai",
   database: "internal-notes",
   migrations: ["./src/database/migrations/*.ts"],
+  entities: ["./src/modules/users/entities/*.ts"],
 });
 
 export function createConnection(host = "database"): Promise<DataSource> {

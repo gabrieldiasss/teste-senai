@@ -4,9 +4,9 @@ import { ListUsersUseCase } from "./ListUsersUseCase";
 class ListUsersController {
   constructor(private listUserUseCase: ListUsersUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const all = this.listUserUseCase.execute();
-
+  async handle(request: Request, response: Response): Response {
+    const all = await this.listUserUseCase.execute(request.params.id);
+    console.log(all)
     return response.json(all);
   }
 }

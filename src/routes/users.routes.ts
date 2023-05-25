@@ -8,7 +8,7 @@ usersRoutes.post("/", (request, response) => {
   return createUserController.handle(request, response)
 });
 
-usersRoutes.get("/", (request, response) => {
+usersRoutes.get("/:id", (request, response) => {
   return listUsersController.handle(request, response)
 });
 

@@ -1,13 +1,8 @@
-import { User } from "../model/User";
-
-interface ICreateUserDto {
-  name: string;
-}
+import { ICreateUserDto } from "../dtos/ICreateUserDTO";
 
 interface IUsersRepository {
-  findByName(name: string): User;
-  list(): User[];
-  create({ name }: ICreateUserDto): void;
+  list(id: string): any;
+  create(data: ICreateUserDto): Promise<void>
 }
 
 export { IUsersRepository, ICreateUserDto };
