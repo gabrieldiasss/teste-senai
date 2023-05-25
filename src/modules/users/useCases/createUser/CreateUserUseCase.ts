@@ -1,6 +1,6 @@
-import { IUsersRepository } from "../repositories/IUsersRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
-class CreateUserService {
+class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute(name: string): void {
@@ -14,4 +14,4 @@ class CreateUserService {
   }
 }
 
-export { CreateUserService };
+export { CreateUserUseCase };
