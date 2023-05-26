@@ -1,18 +1,19 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { Post } from "../../posts/entities/Post";
 
 @Entity("users")
 class User {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryColumn({ type: "uuid" })
+  id?: string;
 
-  @Column()
+  @Column({ type: "text" })
   name: string;
 
-  @Column()
-  amountPost: number;
+  @OneToMany(() => Post, post => post.user)
+  posts: Post[]
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
 
   constructor() {

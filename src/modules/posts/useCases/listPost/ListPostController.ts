@@ -8,9 +8,9 @@ class ListPostController {
 
     const { startDate, endDate } = request.query
 
-    const users = await this.listPostsUseCase.execute(startDate as string, endDate as string);
+    const posts = await this.listPostsUseCase.execute(startDate as string, endDate as string);
 
-    return response.json({users})
+    return response.json({posts})
   }
 }
 

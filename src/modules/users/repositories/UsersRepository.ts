@@ -24,8 +24,9 @@ class UsersRepository implements IUsersRepository {
   }
 
   async list(id: string) {
-    const user = await this.users.findOneBy({
-      id,
+    const user = await this.users.findOne({
+      where: { id },
+      relations: ['posts'],
     });
     return user;
   }

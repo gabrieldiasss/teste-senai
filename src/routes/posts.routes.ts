@@ -4,7 +4,7 @@ import { listPostsController } from "../modules/posts/useCases/listPost";
 
 const postsRoutes = Router();
 
-postsRoutes.post("/", (request, response) => {
+postsRoutes.post("/:user/create", (request, response) => {
   return createPostController.handle(request, response)
 });
 

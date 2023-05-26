@@ -1,18 +1,23 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+import { User } from "../../users/entities/User";
 
 @Entity("posts")
 class Post {
-  @PrimaryColumn()
+  @PrimaryColumn({ type: "uuid" })
   id?: string;
 
-  @Column()
+  @Column({ type: "text" })
   title: string;
 
-  @Column()
+  @Column({ type: "text" })
   description: string;
 
-  @CreateDateColumn()
+  @ManyToOne(() => User, users => users.posts, { eager: true })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: User
+
+  @CreateDateColumn({ type: "timestamp" })
   created_at: string | Date;
 
   constructor() {

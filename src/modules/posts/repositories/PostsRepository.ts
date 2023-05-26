@@ -10,22 +10,23 @@ class PostsRepository implements IPostsRepository {
     this.posts = AppDataSource.getRepository(Post);
   }
 
-  async create({ title, description }: ICreatePostDto) {
-    const post = this.posts.create({ title, description });
+  async create({ title, description, user }: ICreatePostDto) {
+
+    const post = this.posts.create({ title, description, user });
 
     await this.posts.save(post);
   }
 
   async list(startDate: string, endDate = new Date()) {
-    if (!startDate || !endDate) {
-      const allPosts = await this.posts.find({
+    if (startDate || endDate) {
+      const allPostsFilterByDate = await this.posts.find({
         order: {
           created_at: "DESC",
         },
         take: 10,
       });
 
-      return allPosts;
+      return allPostsFilterByDate;
     }
 
     const allPosts = await this.posts.find({
@@ -33,9 +34,6 @@ class PostsRepository implements IPostsRepository {
         created_at: "DESC",
       },
       take: 10,
-      where: {
-        created_at: Between(startDate, String(endDate)),
-      },
     });
 
     return allPosts;
