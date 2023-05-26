@@ -7,7 +7,7 @@ class CreatePostController {
   handle(request: Request, response: Response): Response {
     const { title, description } = request.body;
 
-    this.createPostUseCase.execute({ title, description });
+    this.createPostUseCase.execute({ title, description});
 
     return response.status(201).send();
   }

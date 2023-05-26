@@ -13,7 +13,7 @@ class Post {
   description: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: string | Date;
 
   constructor() {
     if (!this.id) {

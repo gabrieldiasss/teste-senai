@@ -12,4 +12,8 @@ postsRoutes.get("/", (request, response) => {
   return listPostsController.handle(request, response)
 });
 
+postsRoutes.get("/date", (request, response) => {
+  return listPostsController.handleByDate(request, response)
+});
+
 export { postsRoutes };
