@@ -7,6 +7,7 @@ interface ICreatePostDto {
 
 interface IPostsRepository {
   create({ title, description}: ICreatePostDto): void;
+  list(): Promise<Post[]>
 }
 
 export { IPostsRepository, ICreatePostDto };

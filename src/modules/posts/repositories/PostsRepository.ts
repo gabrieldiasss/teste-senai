@@ -17,8 +17,13 @@ class PostsRepository implements IPostsRepository {
     await this.posts.save(post);
   }
 
-  list() {
-    return this.posts;
+  async list() {
+    const allPosts = await this.posts.find({
+      skip: 1,
+      take: 10
+    })
+
+    return allPosts;
   }
 }
 
