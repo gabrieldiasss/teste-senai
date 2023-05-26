@@ -1,17 +1,22 @@
-import { ICreateUserDto, IUsersRepository } from "../../repositories/IUsersRepository";
-import { UsersRepository } from "../../repositories/UsersRepository";
+import { AppError } from "../../../../errors/AppError";
+import {
+  ICreateUserDto,
+  IUsersRepository,
+} from "../../repositories/IUsersRepository";
 
 class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute({ name, username }: ICreateUserDto): void {
-   /*  const userAlreadyExists = this.usersRepository.findByName(name);
+  async execute({ name, username }: ICreateUserDto) {
+    try {
+      const userAlreadyExists = await this.usersRepository.findByName(name);
 
-    if (userAlreadyExists) {
-      throw new Error("Name already exists!");
-    } */
-
-    this.usersRepository.create({ name, username });
+      if (!userAlreadyExists) {
+        await this.usersRepository.create({ name, username });
+      }
+    } catch (err) {
+      throw new AppError("Name already exists!");
+    }
   }
 }
 
