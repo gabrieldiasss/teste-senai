@@ -9,6 +9,7 @@ export class CreatePosts1685067533075 implements MigrationInterface {
                 columns: [
                     { name: "id", type: "uuid" },
                     { name: "title", type: "varchar" },
+                    { name: "description", type: "varchar" },
                     { name: "created_at", type: "timestamp", default: "now()" }
                 ]
             })

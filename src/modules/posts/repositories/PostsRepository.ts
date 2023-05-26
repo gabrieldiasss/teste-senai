@@ -1,30 +1,20 @@
+import { Repository } from "typeorm";
 import { Post } from "../entities/Post";
 import { ICreatePostDto, IPostsRepository } from "./IPostsRepository";
+import AppDataSource from "../../../database/data-source";
 
 class PostsRepository implements IPostsRepository {
-  private posts: Post[];
+  private posts: Repository<Post>;
 
   constructor() {
-    this.posts = [];
+    this.posts = AppDataSource.getRepository(Post);
   }
 
-  create({ title, description, content, author }: ICreatePostDto): void {
-    const post = new Post();
+  async create({ title, description }: ICreatePostDto) {
+   
+    const post = this.posts.create({ title, description })
 
-    Object.assign(post, {
-      title,
-      description,
-      content,
-      author,
-      created_at: new Date(),
-    });
-
-    this.posts.push(post);
-  }
-
-  verifyIfExistsAccount(name: string): Post {
-    const user = this.posts.find((post) => post.author === name);
-    return user;
+    await this.posts.save(post);
   }
 
   list() {
