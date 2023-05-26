@@ -4,7 +4,7 @@ import { IUsersRepository } from "../../repositories/IUsersRepository";
 class ListUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute(id: string): User {
+  execute(id: string) {
     const users = this.usersRepository.list(id);
 
     return users;
