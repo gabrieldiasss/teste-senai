@@ -1,4 +1,4 @@
-import { Post } from "../model/Post";
+import { Post } from "../entities/Post";
 import { ICreatePostDto, IPostsRepository } from "./IPostsRepository";
 
 class PostsRepository implements IPostsRepository {
@@ -28,7 +28,7 @@ class PostsRepository implements IPostsRepository {
   }
 
   list() {
-    return this.posts
+    return this.posts;
   }
 }
 
