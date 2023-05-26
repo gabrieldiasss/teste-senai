@@ -11,17 +11,18 @@ class PostsRepository implements IPostsRepository {
   }
 
   async create({ title, description }: ICreatePostDto) {
-   
-    const post = this.posts.create({ title, description })
+    const post = this.posts.create({ title, description });
 
     await this.posts.save(post);
   }
 
   async list() {
     const allPosts = await this.posts.find({
-      skip: 1,
+      order: {
+        created_at: "DESC",
+      },
       take: 10
-    })
+    });
 
     return allPosts;
   }
