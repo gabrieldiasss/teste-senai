@@ -17,11 +17,14 @@ class PostsRepository implements IPostsRepository {
     await this.posts.save(post);
   }
 
-  async list(startDate: string, endDate = new Date()) {
+  async list(startDate: string, endDate: string) {
     if (startDate || endDate) {
       const allPostsFilterByDate = await this.posts.find({
         order: {
           created_at: "DESC",
+        },
+        where: {
+          created_at: Between(startDate, endDate)
         },
         take: 10,
       });

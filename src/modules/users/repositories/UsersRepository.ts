@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { LessThan, Repository } from "typeorm";
 import { User } from "../entities/User";
 import { ICreateUserDto, IUsersRepository } from "./IUsersRepository";
 import AppDataSource from "../../../database/data-source";
@@ -27,6 +27,9 @@ class UsersRepository implements IUsersRepository {
     const user = await this.users.findOne({
       where: { id },
       relations: ['posts'],
+      order: {
+        created_at: "DESC",
+      }
     });
     return user;
   }
