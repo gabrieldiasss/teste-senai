@@ -16,20 +16,17 @@ class PostsRepository implements IPostsRepository {
     await this.posts.save(post);
   }
 
-  async list() {
-    const allPosts = await this.posts.find({
-      order: {
-        created_at: "DESC",
-      },
-      take: 10,
-    });
+  async list(startDate: string, endDate = new Date()) {
+    if (!startDate || !endDate) {
+      const allPosts = await this.posts.find({
+        order: {
+          created_at: "DESC",
+        },
+        take: 10,
+      });
 
-    console.log(allPosts);
-
-    return allPosts;
-  }
-
-  async listByQuery(startDate: string, endDate = new Date()) {
+      return allPosts;
+    }
 
     const allPosts = await this.posts.find({
       order: {
@@ -40,8 +37,6 @@ class PostsRepository implements IPostsRepository {
         created_at: Between(startDate, String(endDate)),
       },
     });
-
-    console.log(allPosts);
 
     return allPosts;
   }
