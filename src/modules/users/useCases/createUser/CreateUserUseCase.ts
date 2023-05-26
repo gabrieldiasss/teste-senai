@@ -7,16 +7,14 @@ import {
 class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async execute({ name, username }: ICreateUserDto) {
-    try {
-      const userAlreadyExists = await this.usersRepository.findByName(name);
+  async execute({ name }: ICreateUserDto) {
+    const userAlreadyExists = await this.usersRepository.findByName(name);
 
-      if (!userAlreadyExists) {
-        await this.usersRepository.create({ name, username });
-      }
-    } catch (err) {
+    if (userAlreadyExists) {
       throw new AppError("Name already exists!");
     }
+
+    await this.usersRepository.create({ name });
   }
 }
 

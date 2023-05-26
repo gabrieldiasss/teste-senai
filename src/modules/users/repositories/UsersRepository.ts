@@ -10,17 +10,16 @@ class UsersRepository implements IUsersRepository {
     this.users = AppDataSource.getRepository(User);
   }
 
-  async create({ name, username }: ICreateUserDto) {
+  async create({ name }: ICreateUserDto) {
     const user = await this.users.create({
-      name,
-      username,
+      name
     });
 
     await this.users.save(user);
   }
 
-  async findByName(username: string) {
-    const user = await this.users.findOne({ where: { username } });
+  async findByName(name: string) {
+    const user = await this.users.findOne({ where: { name } });
     return user;
   }
 

@@ -10,9 +10,6 @@ class User {
   name: string;
 
   @Column()
-  username: string;
-
-  @Column()
   amountPost: number;
 
   @CreateDateColumn()
