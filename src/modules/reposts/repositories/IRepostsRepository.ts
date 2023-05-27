@@ -1,10 +1,11 @@
 interface ICreateRepostDto {
   description: string;
+  post: any
 }
 
 interface IRepostsRepository {
   list(): void;
-  create(data: ICreateRepostDto): Promise<void>;
+  create({ description, post }: ICreateRepostDto): Promise<void>;
 }
 
 export { IRepostsRepository, ICreateRepostDto };

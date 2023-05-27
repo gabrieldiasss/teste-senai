@@ -18,8 +18,7 @@ class Post {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User
 
-  @ManyToOne(() => Repost, reposts => reposts.posts)
-  @JoinColumn()
+  @OneToMany(() => Repost, repost => repost.post)
   reposts: Repost[]
 
   @CreateDateColumn({ type: "timestamp" })
