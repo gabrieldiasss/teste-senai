@@ -3,7 +3,7 @@ import { createCommentController } from "../modules/comment/useCases/createComme
 
 const commentsRoutes = Router();
 
-commentsRoutes.post("/:post/create", (request, response) => {
+commentsRoutes.post("/:post/create/:user", (request, response) => {
   return createCommentController.handle(request, response)
 });
 

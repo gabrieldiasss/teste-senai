@@ -8,9 +8,9 @@ class CreateCommentController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { text } = request.body;
-    const { post } = request.params
+    const { post, user } = request.params as DeepPartial<Comment>
 
-    await this.createCommentUseCase.execute({ text, post });
+    await this.createCommentUseCase.execute({ text, post, user });
 
     return response.status(201).json();
   }

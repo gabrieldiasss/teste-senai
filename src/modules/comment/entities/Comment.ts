@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { Post } from "../../posts/entities/Post";
+import { User } from "../../users/entities/User";
 
 @Entity("comments")
 class Comment {
@@ -20,6 +21,10 @@ class Comment {
   @ManyToOne(() => Post, post => post.comments)
   @JoinColumn({ name: "post_id", referencedColumnName: "id" })
   post: Post;
+  
+  @ManyToOne(() => User, user => user.comments, { eager: true })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: User
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;

@@ -10,10 +10,8 @@ class CommentRepository implements ICommentsRepository {
     this.comments = AppDataSource.getRepository(Comment);
   }
 
-  async create({ text, post }: ICreateCommentDto) {
-    const createComment = this.comments.create({ text, post });
-
-    console.log(post)
+  async create({ text, post, user }: ICreateCommentDto) {
+    const createComment = this.comments.create({ text, post, user });
 
     await this.comments.save(createComment);
   }

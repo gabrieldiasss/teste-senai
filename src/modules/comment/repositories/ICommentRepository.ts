@@ -3,7 +3,8 @@ import { Comment } from "../entities/Comment";
 
 interface ICreateCommentDto {
   text: string
-  post: any
+  post: DeepPartial<Comment>
+  user: DeepPartial<Comment>
 }
 
 interface ICommentsRepository {

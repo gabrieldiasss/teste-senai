@@ -2,6 +2,7 @@ import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { Post } from "../../posts/entities/Post";
 import { Repost } from "../../reposts/entities/Repost";
+import { Comment } from "../../comment/entities/Comment";
 
 @Entity("users")
 class User {
@@ -16,6 +17,9 @@ class User {
 
   @OneToMany(() => Repost, repost => repost.user)
   reposts: Repost[]
+
+  @OneToMany(() => Comment, comment => comment.user)
+  comments: Comment[]
 
   @Column({ type: "int", default: 0 })
   amountPosts: number

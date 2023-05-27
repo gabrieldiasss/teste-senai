@@ -4,8 +4,8 @@ import { ICreateCommentDto } from "../../repositories/ICommentRepository";
 class CreateCommentUseCase  {
   constructor(private commentRepository: CommentRepository) {}
 
-  async execute({ text, post }: ICreateCommentDto) {
-    await this.commentRepository.create({ text, post });
+  async execute({ text, post, user }: ICreateCommentDto) {
+    await this.commentRepository.create({ text, post, user });
   }
 }
 
