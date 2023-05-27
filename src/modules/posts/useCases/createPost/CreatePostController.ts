@@ -12,6 +12,8 @@ class CreatePostController {
 
     return response.status(201).json();
   }
+
+  
 }
 
 export { CreatePostController };

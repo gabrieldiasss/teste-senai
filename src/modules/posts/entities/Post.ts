@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 import { User } from "../../users/entities/User";
+import { Repost } from "../../reposts/entities/Repost";
 
 @Entity("posts")
 class Post {
@@ -16,6 +17,10 @@ class Post {
   @ManyToOne(() => User, users => users.posts, { eager: true })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User
+
+  @ManyToOne(() => Repost, reposts => reposts.posts)
+  @JoinColumn()
+  reposts: Repost[]
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: string | Date;
