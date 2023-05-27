@@ -1,9 +1,11 @@
+import { DeepPartial } from "typeorm";
+import { Post } from "../../entities/Post";
 import { IPostsRepository } from "../../repositories/IPostsRepository";
 
 interface IRequest {
   title: string;
   description: string;
-  user: string
+  user: DeepPartial<Post>
 }
 
 class CreatePostUseCase {

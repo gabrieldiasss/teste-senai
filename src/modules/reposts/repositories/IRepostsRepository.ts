@@ -1,7 +1,10 @@
+import { DeepPartial } from "typeorm";
+import { Repost } from "../entities/Repost";
+
 interface ICreateRepostDto {
   description: string;
-  post: any
-  user: any
+  post: DeepPartial<Repost>
+  user: DeepPartial<Repost>
 }
 
 interface IRepostsRepository {

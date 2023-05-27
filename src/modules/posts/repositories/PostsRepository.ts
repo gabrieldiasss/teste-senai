@@ -35,7 +35,7 @@ class PostsRepository implements IPostsRepository {
       return allPosts;
     }
 
-    let options: any = {
+    let options = {
       where: [
         { created_at: Between(startDate, endDate) },
         { user: { id: myPosts } },

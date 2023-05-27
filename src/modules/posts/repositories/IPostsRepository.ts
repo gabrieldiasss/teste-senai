@@ -1,9 +1,10 @@
+import { DeepPartial } from "typeorm";
 import { Post } from "../entities/Post";
 
 interface ICreatePostDto {
   title: string;
   description: string;
-  user: any
+  user: DeepPartial<Post>
 }
 
 interface IPostsRepository {
