@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
-import { ZodError } from "zod"
-import "express-async-errors"
+import { ZodError } from "zod";
+import "express-async-errors";
 
 const app = express();
 
@@ -22,8 +22,10 @@ app.use(
         message: err.message,
       });
     }
-    if(err instanceof ZodError) {
-      return response.status(400).send({ message: 'Validation Error', issues: err.format() })
+    if (err instanceof ZodError) {
+      return response
+        .status(400)
+        .send({ message: "Validation Error", issues: err.format() });
     }
 
     return response.status(500).json({
@@ -32,6 +34,5 @@ app.use(
     });
   }
 );
-
 
 app.listen(3333, () => console.log("Server is running!"));

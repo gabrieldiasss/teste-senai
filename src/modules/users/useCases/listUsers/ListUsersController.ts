@@ -8,7 +8,13 @@ class ListUsersController {
   async handle(request: Request, response: Response): Promise<Response> {
     const all = await this.listUserUseCase.execute(request.params.id);
 
-    return response.json({ ...all, created_at: formattedDate(all.created_at) });
+    const countPost = all.posts.length;
+
+    return response.json({
+      ...all,
+      created_at: formattedDate(all.created_at),
+      amountPosts: countPost,
+    });
   }
 }
 

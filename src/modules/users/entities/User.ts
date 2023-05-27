@@ -13,6 +13,9 @@ class User {
   @OneToMany(() => Post, post => post.user)
   posts: Post[]
 
+  @Column({ type: "int", default: 0 })
+  amountPosts: number
+
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
 

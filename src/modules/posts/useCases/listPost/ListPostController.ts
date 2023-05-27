@@ -6,9 +6,9 @@ class ListPostController {
 
   async handle(request: Request, response: Response): Promise<Response> {
 
-    const { startDate, endDate } = request.query
+    const { startDate, endDate, myPosts } = request.query
 
-    const posts = await this.listPostsUseCase.execute(startDate as string, endDate as string);
+    const posts = await this.listPostsUseCase.execute(startDate as string, endDate as string, myPosts as string);
 
     return response.json({posts})
   }
