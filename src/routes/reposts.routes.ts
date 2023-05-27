@@ -3,7 +3,7 @@ import { createRepostsController } from "../modules/reposts/useCases/createRepos
 
 const repostsRoutes = Router();
 
-repostsRoutes.post("/:post/create", (request, response) => {
+repostsRoutes.post("/:post/create/:user", (request, response) => {
   return createRepostsController.handle(request, response)
 });
 

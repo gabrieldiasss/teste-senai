@@ -22,7 +22,14 @@ class PostsRepository implements IPostsRepository {
         order: {
           created_at: "DESC",
         },
-        relations: ["reposts"],
+        take: 10,
+        relations: {
+          comments: true,
+          user: true,
+          reposts: {
+            user: true,
+          },
+        },
       });
 
       return allPosts;
@@ -39,7 +46,11 @@ class PostsRepository implements IPostsRepository {
       order: {
         created_at: "DESC",
       },
-      relations: ["reposts"],
+      relations: {
+        comments: true,
+        user: true,
+        reposts: true,
+      },
       take: 10,
       ...options,
     });

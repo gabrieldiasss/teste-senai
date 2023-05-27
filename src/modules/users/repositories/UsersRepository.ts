@@ -2,6 +2,7 @@ import { LessThan, Repository } from "typeorm";
 import { User } from "../entities/User";
 import { ICreateUserDto, IUsersRepository } from "./IUsersRepository";
 import AppDataSource from "../../../database/data-source";
+import { AppError } from "../../../errors/AppError";
 
 class UsersRepository implements IUsersRepository {
   private users: Repository<User>;
@@ -12,26 +13,28 @@ class UsersRepository implements IUsersRepository {
 
   async create({ name }: ICreateUserDto) {
     const user = await this.users.create({
-      name
+      name,
     });
 
     await this.users.save(user);
   }
 
   async findByName(name: string) {
-    const user = await this.users.findOne({ where: { name } });
-    return user;
+    const alreadyExists = await this.users.findOne({ where: { name } });
+    return alreadyExists;
   }
 
   async list(id: string) {
-    const user = await this.users.findOne({
+    const listUser = await this.users.findOne({
       where: { id },
-      relations: ['posts'],
+      relations: {
+        posts: true,
+      },
       order: {
         created_at: "DESC",
-      }
+      },
     });
-    return user;
+    return listUser;
   }
 }
 

@@ -10,16 +10,10 @@ class RepostsRepository implements IRepostsRepository {
     this.reposts = AppDataSource.getRepository(Repost);
   }
 
-  async create({ description, post }: ICreateRepostDto): Promise<void> {
-    const repost = this.reposts.create({ description, post });
-
-    console.log(post)
+  async create({ description, post, user }: ICreateRepostDto): Promise<void> {
+    const repost = this.reposts.create({ description, post, user });
 
     await this.reposts.save(repost);
-  }
-
-  list(): void {
-    console.log("Olá");
   }
 }
 

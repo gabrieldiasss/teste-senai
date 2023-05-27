@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 import { v4 as uuidV4 } from "uuid";
 import { User } from "../../users/entities/User";
 import { Repost } from "../../reposts/entities/Repost";
+import { Comment } from "../../comment/entities/Comment";
 
 @Entity("posts")
 class Post {
@@ -14,9 +15,12 @@ class Post {
   @Column({ type: "text" })
   description: string;
 
-  @ManyToOne(() => User, users => users.posts, { eager: true })
+  @ManyToOne(() => User, users => users.posts)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User
+
+  @OneToMany(() => Comment, comment => comment.post)
+  comments: Comment[]
 
   @OneToMany(() => Repost, repost => repost.post)
   reposts: Repost[]

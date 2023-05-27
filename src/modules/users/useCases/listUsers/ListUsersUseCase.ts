@@ -1,13 +1,15 @@
+import { AppError } from "../../../../errors/AppError";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 class ListUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute(id: string) {
-    const users = this.usersRepository.list(id);
+  async execute(id: string) {
 
-    return users;
+    const listUser = await this.usersRepository.list(id);
+
+    return listUser;
   }
 }
 
