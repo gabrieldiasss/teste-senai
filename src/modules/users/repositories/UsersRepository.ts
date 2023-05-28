@@ -1,8 +1,7 @@
-import { LessThan, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { User } from "../entities/User";
 import { ICreateUserDto, IUsersRepository } from "./IUsersRepository";
 import AppDataSource from "../../../database/data-source";
-import { AppError } from "../../../errors/AppError";
 
 class UsersRepository implements IUsersRepository {
   private users: Repository<User>;
@@ -12,7 +11,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   async create({ name }: ICreateUserDto) {
-    const user = await this.users.create({
+    const user = this.users.create({
       name,
     });
 
@@ -21,14 +20,19 @@ class UsersRepository implements IUsersRepository {
 
   async findByName(name: string) {
     const alreadyExists = await this.users.findOne({ where: { name } });
+    console.log(alreadyExists)
+
     return alreadyExists;
   }
 
   async list(id: string) {
+
     const listUser = await this.users.findOne({
       where: { id },
       relations: {
         posts: true,
+        comments: true,
+        reposts: true
       },
       order: {
         created_at: "DESC",

@@ -1,7 +1,8 @@
-import { Between, FindManyOptions, FindOptions, Repository } from "typeorm";
+import { Between, QueryFailedError, Repository } from "typeorm";
 import { Post } from "../entities/Post";
 import { ICreatePostDto, IPostsRepository } from "./IPostsRepository";
 import AppDataSource from "../../../database/data-source";
+import { AppError } from "../../../errors/AppError";
 
 class PostsRepository implements IPostsRepository {
   private posts: Repository<Post>;
@@ -11,9 +12,28 @@ class PostsRepository implements IPostsRepository {
   }
 
   async create({ title, description, user }: ICreatePostDto) {
-    const post = this.posts.create({ title, description, user });
+    try {
+      const post = this.posts.create({ title, description, user });
 
-    await this.posts.save(post);
+      await this.posts.save(post);
+    } catch (error) {
+      if (
+        error instanceof QueryFailedError &&
+        error.message.includes("invalid input syntax for type uuid")
+      ) {
+        throw new AppError(
+          "The provided ID does not exist. Please double-check the ID and try again.",
+          400
+        );
+      }
+    }
+  }
+
+  async findByUser(user: string) {
+    const alreadyExists = await this.posts.findOne({
+      where: { user: { id: user } },
+    });
+    return alreadyExists;
   }
 
   async list(startDate?: string, endDate?: string, myPosts?: string) {
@@ -35,7 +55,7 @@ class PostsRepository implements IPostsRepository {
       return allPosts;
     }
 
-    let options = {
+    const options = {
       where: [
         { created_at: Between(startDate, endDate) },
         { user: { id: myPosts } },

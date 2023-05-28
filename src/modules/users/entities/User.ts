@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { Post } from "../../posts/entities/Post";
 import { Repost } from "../../reposts/entities/Repost";
 import { Comment } from "../../comment/entities/Comment";

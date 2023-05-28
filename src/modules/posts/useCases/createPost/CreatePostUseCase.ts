@@ -1,18 +1,20 @@
-import { DeepPartial } from "typeorm";
+import { DeepPartial, QueryFailedError } from "typeorm";
 import { Post } from "../../entities/Post";
 import { IPostsRepository } from "../../repositories/IPostsRepository";
+import { AppError, ErrorTypeOrm } from "../../../../errors/AppError";
+import { Response } from "express";
 
 interface IRequest {
   title: string;
   description: string;
-  user: DeepPartial<Post>
+  user: string;
 }
 
 class CreatePostUseCase {
   constructor(private postsRepository: IPostsRepository) {}
 
-  execute({ title, description, user }: IRequest): void {
-    this.postsRepository.create({ title, description, user });
+  async execute({ title, description, user }: IRequest): Promise<void> {
+    await this.postsRepository.create({ title, description, user });
   }
 }
 

@@ -1,4 +1,3 @@
-import { UUID } from "typeorm/driver/mongodb/bson.typings";
 import { ICreateUserDto } from "../dtos/ICreateUserDTO";
 import { User } from "../entities/User";
 

@@ -1,4 +1,3 @@
-import { DataSource } from "typeorm";
 import { UsersRepository } from "../../repositories/UsersRepository";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
