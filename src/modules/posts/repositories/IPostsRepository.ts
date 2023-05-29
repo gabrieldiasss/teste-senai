@@ -4,7 +4,7 @@ import { Post } from "../entities/Post";
 interface ICreatePostDto {
   title: string;
   description: string;
-  user: string
+  user: DeepPartial<Post>
 }
 
 interface IPostsRepository {

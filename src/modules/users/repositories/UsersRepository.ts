@@ -20,25 +20,30 @@ class UsersRepository implements IUsersRepository {
 
   async findByName(name: string) {
     const alreadyExists = await this.users.findOne({ where: { name } });
-    console.log(alreadyExists)
+    console.log(alreadyExists);
 
     return alreadyExists;
   }
 
-  async list(id: string) {
-
+  async listOne(id: string) {
     const listUser = await this.users.findOne({
       where: { id },
       relations: {
         posts: true,
         comments: true,
-        reposts: true
+        reposts: true,
       },
       order: {
         created_at: "DESC",
       },
     });
     return listUser;
+  }
+
+  async listAll() {
+    const listAllUsers = await this.users.find()
+
+    return listAllUsers
   }
 }
 

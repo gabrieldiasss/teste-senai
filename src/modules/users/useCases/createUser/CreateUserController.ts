@@ -14,7 +14,7 @@ class CreateUserController {
 
     await this.createUserUseCase.execute({ name });
 
-    return response.status(201).send();
+    return response.status(201).json();
   }
 }
 

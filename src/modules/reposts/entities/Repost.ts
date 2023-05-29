@@ -15,7 +15,7 @@ class Repost {
   @JoinColumn({ name: 'post_id', referencedColumnName: 'id' })
   post: Post
 
-  @ManyToOne(() => User, user => user.reposts, { eager: true })
+  @ManyToOne(() => User, user => user.reposts)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User
 

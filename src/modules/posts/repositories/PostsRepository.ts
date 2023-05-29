@@ -44,7 +44,9 @@ class PostsRepository implements IPostsRepository {
         },
         take: 10,
         relations: {
-          comments: true,
+          comments: {
+            user: true
+          },
           user: true,
           reposts: {
             user: true,

@@ -1,10 +1,10 @@
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
 
 class ListUsersUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(private usersRepository: UsersRepository) {}
 
-  async execute(id: string) {
-    const listUser = await this.usersRepository.list(id);
+  async execute() {
+    const listUser = await this.usersRepository.listAll();
     return listUser;
   }
 }

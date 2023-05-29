@@ -1,13 +1,11 @@
-import { DeepPartial, QueryFailedError } from "typeorm";
-import { Post } from "../../entities/Post";
+import { DeepPartial } from "typeorm";
 import { IPostsRepository } from "../../repositories/IPostsRepository";
-import { AppError, ErrorTypeOrm } from "../../../../errors/AppError";
-import { Response } from "express";
+import { Post } from "../../entities/Post";
 
 interface IRequest {
   title: string;
   description: string;
-  user: string;
+  user: DeepPartial<Post>;
 }
 
 class CreatePostUseCase {

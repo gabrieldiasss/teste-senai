@@ -22,7 +22,7 @@ class Comment {
   @JoinColumn({ name: "post_id", referencedColumnName: "id" })
   post: Post;
   
-  @ManyToOne(() => User, user => user.comments, { eager: true })
+  @ManyToOne(() => User, user => user.comments)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User
 
