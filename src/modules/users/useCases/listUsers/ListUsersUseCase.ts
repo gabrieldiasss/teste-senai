@@ -1,7 +1,7 @@
-import { UsersRepository } from "../../repositories/UsersRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 class ListUsersUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   async execute() {
     const listUser = await this.usersRepository.listAll();
