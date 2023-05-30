@@ -9,11 +9,14 @@ import { createConnection } from "./database/data-source";
 import { router } from "./routes";
 import { AppError, ErrorTypeOrm } from "./errors/AppError";
 import { TypeORMError } from "typeorm";
+import swaggerUi from "swagger-ui-express"
+import swaggerFile from "./swagger.json"
 
 createConnection();
 
 app.use(express.json());
 
+app.use("/api-docs", swaggerUi.serve,swaggerUi.setup(swaggerFile))
 app.use(router);
 
 app.use((err: Error, _: Request, response: Response, next: NextFunction) => {

@@ -1,0 +1,339 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Internal-Notes Documentation",
+    "description": "This is an API Internal Notes",
+    "contact": {
+      "email": "gabrieldiascorrea7@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "Summary": "Create user",
+        "description": "Create new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "NameTest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Name already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "Summary": "List users",
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["User"],
+        "description": "Returns users based on ID",
+        "summary": "Find user by ID",
+        "operationId": "id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "get specific user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "amountPosts": {
+                        "type": "number"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "posts": {
+                        "type": "array"
+                      },
+                      "reposts": {
+                        "type": "array"
+                      },
+                      "comments": {
+                        "type": "array"
+                      }
+                    },
+                    "example": {
+                      "id": 1,
+                      "name": "NameTest",
+                      "amountPosts": 0,
+                      "created_at": "31 de maio de 2023",
+                      "posts": [],
+                      "reposts": [],
+                      "comments": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Id not exists"
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "post": {
+        "tags": ["Post"],
+        "Summary": "Create post",
+        "description": "Create new post",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "create new post with user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Title test",
+                  "description": "Description test"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Id not exists"
+          }
+        }
+      }
+    },
+    "posts": {
+      "get": {
+        "tags": ["Post"],
+        "Summary": "List posts",
+        "description": "List all posts",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "user": {
+                        "type": "object"
+                      },
+                      "reposts": {
+                        "type": "array"
+                      },
+                      "comments": {
+                        "type": "array"
+                      }
+                    },
+                    "example": {
+                      "id": "1234",
+                      "title": "Title test",
+                      "description": "Title test",
+                      "user": {
+                        "name": "Gabriel"
+                      },
+                      "reposts": [],
+                      "comments": [],
+                      "created_at": "14-05-21"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reposts/{postId}/create/{userId}": {
+      "post": {
+        "tags": ["Reposts"],
+        "Summary": "Create repost",
+        "description": "Create new repost",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "create repost with post id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "create repost with user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "description": "Description test"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Id not exists"
+          }
+        }
+      }
+    },
+    "comments/${postId}/create/{userId}": {
+      "post": {
+        "tags": ["Comments"],
+        "Summary": "Create comment",
+        "description": "Create new comment",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "create repost with post id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "create repost with user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "description": "Description test"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Id not exists"
+          }
+        }
+      } 
+    }
+  }
+}
