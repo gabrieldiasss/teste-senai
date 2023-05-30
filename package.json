@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "build": "tsc --project tsconfig.json",
     "start": "node build/server.js",
+    "vercel-build": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run",
     "test": "cross-env NODE_ENV=test jest --no-cache --runInBand",
     "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts"
   },
