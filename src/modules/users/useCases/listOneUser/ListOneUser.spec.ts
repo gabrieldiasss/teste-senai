@@ -26,8 +26,6 @@ describe("List users", () => {
 
     const getUserResponse = await request(app).get(`/users/${userId}`);
 
-    console.log(getUserResponse.body)
-
     expect(getUserResponse.status).toBe(200);
     expect(getUserResponse.body).toEqual(
       expect.objectContaining({
