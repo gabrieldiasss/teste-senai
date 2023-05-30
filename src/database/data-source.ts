@@ -6,7 +6,7 @@ import 'dotenv/config'
 
 const options: DataSourceOptions & SeederOptions = {
   type: "postgres",
-  host: process.env.DB_URI,
+  host: process.env.DATABASE_URL,
   port: 5432,
   username: "docker",
   password: "senai",
