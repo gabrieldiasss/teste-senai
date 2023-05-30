@@ -5,7 +5,7 @@ import { MainSeeder } from "../seeds/MainSeeder";
 
 const options: DataSourceOptions & SeederOptions = {
   type: "postgres",
-  host: "localhost",
+  host: process.env.DB_URI,
   port: 5432,
   username: "docker",
   password: "senai",
