@@ -4,7 +4,7 @@ import { createConnection } from "../../../../database/data-source";
 import { DataSource } from "typeorm";
 
 let connection: DataSource;
-describe("List users controller", () => {
+describe("Create user", () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.runMigrations();
@@ -15,14 +15,19 @@ describe("List users controller", () => {
     await connection.destroy();
   });
 
-  it("should be able to list all users", async () => {
-    await request(app).post("/users").send({
+  it("should be able to create new user", async () => {
+    const response = await request(app).post("/users").send({
       name: "Gabriel",
     });
 
-    const response = await request(app).get("/users");
+    expect(response.status).toBe(201);
+  });
 
-    expect(response.status).toBe(200);
-    expect(response.body.allUsers.length).toBe(1);
+  it("should not be able to create new user if name already exists", async () => {
+    const response = await request(app).post("/users").send({
+      name: "Gabriel",
+    });
+
+    expect(response.status).toBe(400);
   });
 });
