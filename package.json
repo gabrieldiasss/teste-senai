@@ -9,7 +9,7 @@
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/database/migrations/default",
     "lint": "eslint .",
     "build": "tsc --project tsconfig.json",
-    "start": "node ./dist/index.js",
+    "start": "node ./build/index.js",
     "test": "cross-env NODE_ENV=test jest --no-cache --runInBand",
     "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts"
   },
