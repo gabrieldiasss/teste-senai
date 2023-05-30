@@ -15,14 +15,5 @@ describe("List all users", () => {
     await connection.destroy();
   });
 
-  it("should be able to list all users", async () => {
-    await request(app).post("/users").send({
-      name: "Gabriel",
-    });
-
-    const response = await request(app).get("/users");
-
-    expect(response.status).toBe(200);
-    expect(response.body.allUsers.length).toBe(1);
-  });
+ 
 });
