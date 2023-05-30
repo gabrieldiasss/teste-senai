@@ -2,10 +2,13 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/server.ts",
-      "use": "@vercel/node"
+      "src": "Dockerfile",
+      "use": "@vercel/dokcer"
     }
   ],
+  "env": {
+    "DATABASE_URL": "postgres://gabrieldiascorrea7:fWgODqcaE59Y@ep-withered-haze-645359.us-east-2.aws.neon.tech/neondb"
+  },
   "routes": [
     {
       "src": "(.*)",
