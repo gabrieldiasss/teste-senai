@@ -8,7 +8,8 @@
     "migration:run": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/database/migrations/default",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --no-cache --runInBand"
+    "test": "cross-env NODE_ENV=test jest --no-cache --runInBand",
+    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^2.0.0",
     "typeorm": "^0.3.16",
+    "typeorm-extension": "^2.8.1",
     "uuid": "^9.0.0",
     "zod": "^3.21.4"
   },

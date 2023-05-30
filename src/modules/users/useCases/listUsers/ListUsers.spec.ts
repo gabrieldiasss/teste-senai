@@ -1,5 +1,3 @@
-import request from "supertest";
-import { app } from "../../../../app";
 import { createConnection } from "../../../../database/data-source";
 import { DataSource } from "typeorm";
 
