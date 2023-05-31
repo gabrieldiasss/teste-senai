@@ -2,14 +2,14 @@
   "name": "internal-notes",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "dev": "ts-node-dev --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/database/migrations/default",
     "lint": "eslint .",
     "test": "set NODE_ENV=test&&jest --runInBand",
-    "seed": "ts-node ./node_modules/typeorm-extension/src/cli/index.js seed -d ./src/data-source.ts"
+    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts"
   },
   "keywords": [],
   "author": "",

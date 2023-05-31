@@ -4,7 +4,7 @@ import request from "supertest";
 import { app } from "../../../app";
 
 let connection: DataSource;
-describe("Reposts", () => {
+describe("Comments", () => {
   beforeAll( async () => {
     connection = await createConnection()
     await connection.runMigrations()
@@ -41,9 +41,9 @@ describe("Reposts", () => {
     const postId = postListResponse.body.posts[0].id;
 
     const commentCreated = await request(app)
-    .post(`/reposts/${postId}/create/${userIdSecond}`)
+    .post(`/comments/${postId}/create/${userIdSecond}`)
     .send({
-        description: "Post very cool",
+        text: "Muito legal",
     })
 
     expect(commentCreated.status).toBe(201)

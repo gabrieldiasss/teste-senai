@@ -10,8 +10,8 @@ interface IRequest {
 
 class CreatePostUseCase {
   constructor(private postsRepository: IPostsRepository) {}
-
   async execute({ title, description, user }: IRequest): Promise<void> {
+
     await this.postsRepository.create({ title, description, user });
   }
 }
