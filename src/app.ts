@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";

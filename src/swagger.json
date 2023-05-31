@@ -134,7 +134,7 @@
         }
       }
     },
-    "/posts/{id}": {
+    "/posts/{id}/create": {
       "post": {
         "tags": ["Post"],
         "Summary": "Create post",

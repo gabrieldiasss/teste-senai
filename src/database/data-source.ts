@@ -2,11 +2,10 @@ import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 import { MainSeeder } from "../seeds/MainSeeder";
-import 'dotenv/config'
 
 const options: DataSourceOptions & SeederOptions = {
   type: "postgres",
-  host: process.env.DATABASE_URL,
+  host: "localhost",
   port: 5432,
   username: "docker",
   password: "senai",
@@ -18,10 +17,10 @@ const options: DataSourceOptions & SeederOptions = {
 
 const AppDataSource = new DataSource(options);
 
-export function createConnection(): Promise<DataSource> {
+export function createConnection(host = "database"): Promise<DataSource> {
 
   return AppDataSource.setOptions({
-    host: process.env.DB_URI,
+    host: process.env.NODE_ENV === "test" ? "localhost" : host,
     database:
       process.env.NODE_ENV === "test"
         ? "senai_test1"
